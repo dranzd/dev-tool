@@ -6,3 +6,6 @@ $> rsync -n --copy-links -rtgoDCzvK --exclude-from=image_backup_exclude -e "ssh 
 
 [DATABASE]
 $> mysqldump -u UNAME -p --add-drop-table --extended-insert DBASE-NAME | gzip -9 > /path/to/backup-with-drop-2016XXXX-XXXX.sql.gz
+
+[FETCH DATABASE BACKUP FROM SERVER]
+$> scp -P XXXX user@yoursite.com:/path/to/dbase/backup-with-drop-2016XXXX-XXXX.sql.gz /path/to/destination/
