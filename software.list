@@ -1,0 +1,17 @@
+[Server]
+Cacti
+MantisBT
+ngrok
+
+[PHP]
+PHPMailer
+PhpDoc
+
+[Dev]
+Meld
+Mantis Bug Tracker
+Sublime Text 2/3
+
+[Other]
+Vargrant
+yEd
