@@ -1,0 +1,12 @@
+/srv/www/site.com/logs/*.log {
+    weekly
+    missingok
+    rotate 8
+    compress
+    delaycompress
+    notifempty
+    create 640 user group
+    sharedscripts
+    dateext
+    dateformat -prefix01-%Y-%m-%d-%s
+}
