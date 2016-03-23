@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# -----------------------------------------------------------------------------------
+# Save current rules
+# -----------------------------------------------------------------------------------
+mkdir -p /etc/iptables && touch /etc/iptables/rules.v4
+iptables-save > /etc/iptables/rules.v4
+
+# -----------------------------------------------------------------------------------
+# Create script to save rules when network goes down
+# -----------------------------------------------------------------------------------
+if [ -f /etc/network/if-post-down.d/iptables ]; then
+    touch /etc/network/if-post-down.d/iptables
+fi
+
+cat <<EOF > /etc/network/if-post-down.d/iptables
+#!/bin/sh
+
+    iptables-save -c > /etc/iptables/rules.v4
+
+    if [ -f /etc/iptables/rules.down.v4 ]; then
+        iptables-restore < /etc/iptables/rules.down.v4
+    fi
+
+    exit 0
+EOF
+
+# -----------------------------------------------------------------------------------
+# Create script to restore rules when network goes up
+# -----------------------------------------------------------------------------------
+if [ -f /etc/network/if-pre-up.d/iptables ]; then
+    touch /etc/network/if-pre-up.d/iptables
+fi
+
+cat <<EOF > /etc/network/if-pre-up.d/iptables
+#!/bin/sh
+
+    iptables-restore < /etc/iptables/rules.v4
+    exit 0
+EOF
+
+# -----------------------------------------------------------------------------------
+# Make scripts executables
+# -----------------------------------------------------------------------------------
+chmod +x /etc/network/if-post-down.d/iptables
+chmod +x /etc/network/if-pre-up.d/iptables
