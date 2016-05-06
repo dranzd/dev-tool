@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Encrypt file
+
+if [[ ! -n $1 || -e $1 && ! -f $1 ]]; then
+    echo "Please provide file to encrypt"
+    exit
+fi
+
+if [[ -n $2 && -e $2 && ! -f $2 ]]; then
+    echo "Please provide filename to store the decrypted content"
+    exit
+fi
+
+OUTPUT=file.encrypted-`date +\%Y\%m\%d`
+
+if [[ -n $2 ]]; then
+    OUTPUT=$2
+fi
+
+openssl aes-256-cbc -a -in $1 -out $OUTPUT
