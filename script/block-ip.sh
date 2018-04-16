@@ -24,5 +24,5 @@ CMD="sudo iptables -I INPUT 2 -s $IP -j DROP -m comment --comment \"Blocking $LO
 for REMOTE in $REMOTES
 do
         echo -e "\t * \e[1;32mBlocking IP $IP with location $LOCATION on REMOTE $REMOTE\e[0m"
-        ssh -p 1122 $REMOTE "$CMD"
+        ssh -p 1122 -t $REMOTE "$CMD"
 done
