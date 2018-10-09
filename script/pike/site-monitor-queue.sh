@@ -4,7 +4,7 @@ COUNT=`ps -fC php | grep -c "index.php queue doctrine default --start"`
 
 echo -e "Found process: $COUNT"
 
-if [[ $COUNT == 0 ]]; then
+if [ $COUNT -eq 0 ]; then
   echo -e "Process not running, executing now..."
   ./site-run-queue.sh
 else
