@@ -2,7 +2,7 @@
 
 FILENAME="backup-`date --date="1 day ago" +'%Y%m%d-020001'`.sql.gz"
 DEST="/destination/directory"
-COMMAND="scp -P 1122 user@domain.com:~/source/$FILENAME $DEST/$FILENAME"
+COMMAND="scp -P 1234 user@domain.com:~/source/$FILENAME $DEST/$FILENAME"
 
 if [ ! -f $DEST/$FILENAME ]; then
     echo "Executing command: "
