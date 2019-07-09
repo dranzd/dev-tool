@@ -1,3 +1,4 @@
 $> iptables -I INPUT 1 -s 0.0.0.0/00 -j DROP -m comment --comment " Comment Here "
 $> iptables -L --line-numbers
 $> iptables -S
+$> iptables -D fail2ban-ssh 123
