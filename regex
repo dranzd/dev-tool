@@ -1,0 +1,3 @@
+To find file with class having constructor with same name as the class name
+
+  /class ?([\w]+)[ \n]*?{[\s\w\W]*?function[ ]*?\1[ ]*?\(/
