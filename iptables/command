@@ -2,3 +2,6 @@ $> iptables -I INPUT 1 -s 0.0.0.0/00 -j DROP -m comment --comment " Comment Here
 $> iptables -L --line-numbers
 $> iptables -S
 $> iptables -D fail2ban-ssh 123
+
+Allow access to mysql remotely when fail2ban is enabled (INPUT 2 is after fail2ban-ssh)
+$> iptables -I INPUT 2 -i eth0 -s x.x.x.x -p tcp --destination-port 3306 -j ACCEPT
