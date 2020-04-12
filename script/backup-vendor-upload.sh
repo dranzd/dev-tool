@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXCLUDE_FROM_FILE=/path/to/git/source/_docs/dev/upload_vendor_copy_rsync_exclude
+EXCLUDE_FROM_FILE=/path/to/git/source/_docs/[dev|backup/tools]/upload_vendor[_copy]_rsync_exclude
 LOG_FILE=/path/to/rsync.log
 USER=user
 PORT=1234
