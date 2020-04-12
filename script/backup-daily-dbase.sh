@@ -38,14 +38,14 @@ done
 SITE=${DBASE}
 echo -e "Running dbase backup of site \e[4m${SITE}\e[0m"
 
-CMD="scp -P ${PORT} ${USER}@${REMOTE}:$SRC_DIR/$FILENAME $DST_DIR/$FILENAME"
+CMD="scp -P ${PORT} ${USER}@${REMOTE}:${SRC_DIR}${DBASE}-${FILENAME} ${DST_DIR}${FILENAME}"
 
 if [[ $SHOW_CMD_ONLY == true ]]; then
     echo -e "\e[32m${CMD} >> ${LOG_FILE}\e[0m"
 else
     echo -e "** Executing command"
     echo -e "\e[32m${CMD} >> ${LOG_FILE}\e[0m"
-    if [[ -z DRY_RUN ]]; then
+    if [[ -z "${DRY_RUN}" ]]; then
         eval "$CMD >> $LOG_FILE"
     fi
 fi
