@@ -7,3 +7,7 @@ $> alias phpbrew-switch-5='phpbrew switch php-5.5.22 && sudo a2dismod php7.0 && 
 
 [HTACCESS]
 $> ssh -p PORT USER@REMOTE-SERVER -t "sudo /PATH/TO/htpasswd /PATH/TO/HTPASSWD-FILE USERNAME"
+
+[FAIL2BAN]
+$> fail2ban-client status
+$> fail2ban-client set [JAILNAME, e.g. sshd] unbanip [IPADDRESS]
