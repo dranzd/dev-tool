@@ -11,3 +11,6 @@ $> ssh -p PORT USER@REMOTE-SERVER -t "sudo /PATH/TO/htpasswd /PATH/TO/HTPASSWD-F
 [FAIL2BAN]
 $> fail2ban-client status
 $> fail2ban-client set [JAILNAME, e.g. sshd] unbanip [IPADDRESS]
+
+[BASH]
+$> wget -qO - HTTP://DOMAIN/PATH/TO/SCRIPT | bash
