@@ -1,4 +1,5 @@
 # Register new certificate
+# To support www and non-www, need to provide both like so "-d domain.com -d www.domain.com"
 $> certbot --apache certonly -d domain.name[,other-domain.name]
 
 # Renew certificate of specific domain
