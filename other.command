@@ -14,3 +14,6 @@ $> fail2ban-client set [JAILNAME, e.g. sshd] unbanip [IPADDRESS]
 
 [BASH]
 $> wget -qO - HTTP://DOMAIN/PATH/TO/SCRIPT | bash
+
+[FIND & EXECUTE COMMAND]
+$> find [DIR_PATH_HERE] -type [d=DIR,f=FILE] -exec [COMMAND HERE; e.g. chmod 0755] {} \;
