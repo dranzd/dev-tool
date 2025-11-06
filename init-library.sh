@@ -1,11 +1,92 @@
 #!/bin/bash
 # Usage: ./init-library.sh project-name [git@github.com:user/repo.git]
 
+# Color definitions
+if test -t 1; then
+    ncolors=$(tput colors)
+    if test -n "$ncolors" && test "$ncolors" -ge 8; then
+        BOLD="$(tput bold)"
+        YELLOW="$(tput setaf 3)"
+        GREEN="$(tput setaf 2)"
+        CYAN="$(tput setaf 6)"
+        RED="$(tput setaf 1)"
+        NC="$(tput sgr0)"
+    fi
+fi
+
+# Function to display help
+function display_help {
+    echo "${GREEN}${BOLD}PHP Library Project Initializer${NC}"
+    echo
+    echo "${YELLOW}DESCRIPTION:${NC}"
+    echo "  Scaffolds a complete PHP library project with Docker support, testing,"
+    echo "  and development tools. Creates a production-ready structure following"
+    echo "  modern PHP best practices."
+    echo
+    echo "${YELLOW}USAGE:${NC}"
+    echo "  ${CYAN}init-library.sh${NC} ${BOLD}<project-name>${NC} [repository-url]"
+    echo "  ${CYAN}init-library.sh${NC} ${BOLD}--help${NC}"
+    echo
+    echo "${YELLOW}ARGUMENTS:${NC}"
+    echo "  ${BOLD}project-name${NC}      Name of the library project (required)"
+    echo "                     Used for directory name and Composer package name"
+    echo "                     Example: my-awesome-library"
+    echo
+    echo "  ${BOLD}repository-url${NC}    Git repository URL (optional)"
+    echo "                     If provided, sets up git remote and pushes initial commit"
+    echo "                     Example: git@github.com:username/repo.git"
+    echo
+    echo "${YELLOW}WHAT IT CREATES:${NC}"
+    echo "  ${GREEN}•${NC} Project directory structure (src/, tests/)"
+    echo "  ${GREEN}•${NC} Git repository with initial commit"
+    echo "  ${GREEN}•${NC} Composer configuration (PSR-4 autoloading)"
+    echo "  ${GREEN}•${NC} PHPUnit testing setup"
+    echo "  ${GREEN}•${NC} Docker development environment (PHP 8.2)"
+    echo "  ${GREEN}•${NC} Docker Compose configuration"
+    echo "  ${GREEN}•${NC} Utils script for Docker management (Laravel Sail-like)"
+    echo "  ${GREEN}•${NC} .gitignore file"
+    echo
+    echo "${YELLOW}GENERATED FILES:${NC}"
+    echo "  ${CYAN}src/${NC}              Source code directory"
+    echo "  ${CYAN}tests/${NC}            Test files directory"
+    echo "  ${CYAN}composer.json${NC}     Composer package configuration"
+    echo "  ${CYAN}phpunit.xml${NC}       PHPUnit configuration"
+    echo "  ${CYAN}Dockerfile${NC}        Docker image definition"
+    echo "  ${CYAN}docker-compose.yml${NC} Docker Compose services"
+    echo "  ${CYAN}utils${NC}             Docker management script"
+    echo "  ${CYAN}.gitignore${NC}        Git ignore rules"
+    echo
+    echo "${YELLOW}EXAMPLES:${NC}"
+    echo "  ${CYAN}# Create a local library project${NC}"
+    echo "  ./init-library.sh my-library"
+    echo
+    echo "  ${CYAN}# Create and push to remote repository${NC}"
+    echo "  ./init-library.sh my-library git@github.com:user/my-library.git"
+    echo
+    echo "${YELLOW}AFTER CREATION:${NC}"
+    echo "  Navigate to the project directory and use the ${BOLD}utils${NC} script:"
+    echo "  ${CYAN}cd my-library${NC}"
+    echo "  ${CYAN}./utils up${NC}          # Start Docker containers"
+    echo "  ${CYAN}./utils test${NC}        # Run tests"
+    echo "  ${CYAN}./utils shell${NC}       # Open shell in container"
+    echo "  ${CYAN}./utils --help${NC}      # See all available commands"
+    echo
+    exit 0
+}
+
+# Check for help flag
+if [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+    display_help
+fi
+
 PROJECT_NAME=$1
 REPO_URL=$2
 
 if [ -z "$PROJECT_NAME" ]; then
-  echo "Usage: ./init-library.sh project-name [git@github.com:user/repo.git]"
+  echo "${RED}Error: Project name is required${NC}"
+  echo
+  echo "Usage: ./init-library.sh <project-name> [repository-url]"
+  echo "       ./init-library.sh --help"
   exit 1
 fi
 
